@@ -6,6 +6,6 @@ This repository contains two STATA do files that implement the LP-DiD estimator 
 
 Both examples illustrate the case of binary, staggered and absorbing treatment, when only not yet treated units are used as controls. 
 
-- "LP-DiD_examplefile.do" uses a simulated dataset similar to the Montecarlo simulations presented in Dube, Girardi, Jorda' and Taylor (2023). 
+- "LP_DiD_examplefile.do" uses a simulated dataset similar to the Montecarlo simulations presented in Dube, Girardi, Jorda' and Taylor (2023). 
 
 - "lpdid_test.do" applies LP-DiD in a simulated dataset from Borusyak (2021).
