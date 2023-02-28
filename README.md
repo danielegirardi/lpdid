@@ -1,1 +1,1 @@
-# lpdid
+# LP-DiD
