@@ -1,6 +1,6 @@
 # LP-DiD
 
-Dube, Girardi, Jorda' and Taylor (2023) proposes a local projections approach to difference-in-differences event studies - LP-DiD.
+Dube, Girardi, Jorda' and Taylor (2023) propose a local projections approach to difference-in-differences event studies - LP-DiD.
 
 This repository contains two STATA do files that implement the LP-DiD estimator in simulated datasets. 
 
