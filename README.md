@@ -2,7 +2,7 @@
 
 Dube, Girardi, Jorda' and Taylor (2023) propose a local projections approach to difference-in-differences event studies - LP-DiD.
 
-This repository contains two STATA do files that implement the LP-DiD estimator in simulated datasets. 
+This repository contains three STATA do files that implement the LP-DiD estimator in simulated datasets. 
 
 The first two examples illustrate the case of binary, staggered and absorbing treatment, when only not yet treated units are used as controls:
 
