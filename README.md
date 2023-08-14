@@ -10,7 +10,7 @@ The first two examples illustrate the case of binary, staggered and absorbing tr
 
 - "lpdid_test.do" applies LP-DiD in a simulated dataset from Borusyak (2021).
 
-The third example ("LPDiD_nonabsorbing_example.do") illustrates the case of non-absorbing treatment, meaning that units can enter and exit treatment multiple times.
+The third example ("LPDiD_nonabsorbing_example.do") illustrates the case of a binary non-absorbing treatment, meaning that units can enter and exit treatment multiple times.
 
 Related paper: 
 Dube, Girardi, Jorda' and Taylor (2023) "A Local Projections Approach to Difference-in-Differences Event Studies", NBER Working Paper 31184, http://www.nber.org/papers/w31184
