@@ -12,7 +12,7 @@ The first two examples illustrate the case of binary, staggered and absorbing tr
 
 The third example ("LPDiD_nonabsorbing_example.do") illustrates the case of a binary non-absorbing treatment, meaning that units can enter and exit treatment multiple times.
 
-*** DEC 2023 UPDATE: ***
+*** DEC 2023 UPDATE ***
 
 A canned STATA command implementing LP-DiD (by Daniele Girardi and Alexander Busch) is now available on SSC. It can be installed from within Stata by typing 
 ```
