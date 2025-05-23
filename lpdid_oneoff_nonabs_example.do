@@ -99,7 +99,6 @@ qui gen 	treat= 0
 qui replace treat= 1 if time==edate1|time==edate2|time==edate3
 
 // Assign (dynamic & heterogeneous) treatment effects to treated units.
-* Effects of entering and exiting treatment are both gradual and both stabilize 5 periods after treatment. Early adopters experience stronger effects.
 qui scalar P = 0.5
 qui egen min_ed = min(edate1)
 
