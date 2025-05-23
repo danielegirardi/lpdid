@@ -1,6 +1,8 @@
 # LP-DiD
 
-Dube, Girardi, Jorda' and Taylor (https://www.nber.org/papers/w31184) propose a local projections approach to estimating difference-in-differences designs - LP-DiD.
+Dube, Girardi, Jorda' and Taylor (https://www.nber.org/papers/w31184) propose a local projections approach to estimating difference-in-differences designs - LP-DiD. LP-DiD combines local projections with a 'clean control' condition to avoid the 'negative weighting' bias that fixed-effects estimators can suffer from when treatment is staggered. It can estimate either a variance-weighted convex combination of cohort-specific effects or (through a reweighted or regression-adjustment version) the equally-weighted ATT. LP-DiD can include covariates and can address settings where treatment is non-absorbing (units can enter and exit treatment). Relative to other recent DiD estimator, LP-DiD is especially simple and fast to implement, and offers a good amount of flexibility.
+
+***
 
 # LP-DiD STATA COMMAND
 
@@ -14,6 +16,7 @@ help lpdid
 ```
 to read the help file, which explains the syntax and working of the command, and provides examples using simulated datasets. More details can be found on the package listing (https://econpapers.repec.org/software/bocbocode/S459273.htm), and you can ask questions (or signal possible problems/bugs) by sending us an email or by replying to the corresponding Statalist discussion (https://www.statalist.org/forums/forum/general-stata-discussion/general/1736005-lpdid-new-module-implementing-local-projections-difference-in-differences)
 
+***
 
 # EXAMPLE CODES FOR "MANUAL" IMPLEMENTATION OF LP-DiD IN STATA
 
