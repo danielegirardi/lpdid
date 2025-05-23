@@ -15,15 +15,15 @@ help lpdid
 to read the help file, which explains the syntax and working of the command, and provides examples using simulated datasets. More details can be found on the package listing (https://econpapers.repec.org/software/bocbocode/S459273.htm), and you can ask questions (or signal possible problems/bugs) by sending us an email or by replying to the corresponding Statalist discussion (https://www.statalist.org/forums/forum/general-stata-discussion/general/1736005-lpdid-new-module-implementing-local-projections-difference-in-differences)
 
 
-# EXAMPLE CODES FOR "MANUAL IMPLEMENTATION" OF LP-DiD IN STATA
+# EXAMPLE CODES FOR "MANUAL" IMPLEMENTATION OF LP-DiD IN STATA
 
-While the lpdid STATA command is available, it is also easy to implement the LP-DiD estimator "manually", in the sense of writing your own STATA code for implementing LP-DiD. You might want to do this either because your application requires some bespoke adjustment, or to make sure to understand how the sausage is made. "Manually" implementing LP-DiD is easy, because the method essentially consists in estimating a simple regression (or a regression-adjustment specification) in an estimation sample defined by a 'clean control' condition.
+While the lpdid STATA command is available, it is also easy to implement the LP-DiD estimator "manually", in the sense of writing your own STATA code for implementing LP-DiD. You might want to do this either because your application requires some bespoke adjustment, or to make sure you understand how the sausage is made. "Manually" implementing LP-DiD is easy, because the method essentially consists in estimating a simple regression (or a regression-adjustment specification) in an estimation sample defined by a 'clean control' condition.
 
 This repository contains four STATA do files that implement the LP-DiD estimator in simulated datasets. 
 
 Two examples illustrate the case of binary, staggered and absorbing treatment, when only not yet treated units are used as controls:
 
-- "LP_DiD_examplefile.do" uses a simulated dataset similar to the Montecarlo simulations presented in Dube, Girardi, Jorda' and Taylor (2023). 
+- "LP_DiD_examplefile.do" uses a simulated dataset somewhat similar to the Montecarlo simulations presented in Dube, Girardi, Jorda' and Taylor (2023). 
 
 - "lpdid_test.do" applies LP-DiD in a simulated dataset from Borusyak (2021).
 
