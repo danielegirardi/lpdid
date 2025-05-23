@@ -1,6 +1,8 @@
 # LP-DiD
 
-Dube, Girardi, Jorda' and Taylor (https://www.nber.org/papers/w31184) propose a local projections approach to estimating difference-in-differences designs - LP-DiD. LP-DiD combines local projections with a 'clean control' condition to avoid the 'negative weighting' bias that fixed-effects estimators can suffer from when treatment is staggered. It can estimate either a variance-weighted convex combination of cohort-specific effects or (through a reweighted or regression-adjustment version) the equally-weighted ATT. LP-DiD can include covariates and can address settings where treatment is non-absorbing (units can enter and exit treatment). Relative to other recent DiD estimator, LP-DiD is especially simple and fast to implement, and offers a good amount of flexibility.
+Dube, Girardi, Jorda' and Taylor (https://www.nber.org/papers/w31184) propose a local projections approach to estimating difference-in-differences designs - LP-DiD. 
+
+LP-DiD combines local projections with a 'clean control' condition to avoid the 'negative weighting' bias that fixed-effects estimators can suffer from when treatment is staggered. It can estimate either a variance-weighted convex combination of cohort-specific effects or (through a reweighted or regression-adjustment version) the equally-weighted ATT. LP-DiD can include covariates and can address settings where treatment is non-absorbing (units can enter and exit treatment). Relative to other recent DiD estimator, LP-DiD is especially simple and fast to implement, and offers a good amount of flexibility.
 
 ***
 
