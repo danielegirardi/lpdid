@@ -1,13 +1,16 @@
 /* 
-	This do file implements the LP-DiD estimator (Dube, Girardi, Jorda' and Taylor, 2023) in a simulated example dataset.
+	This do file implements the LP-DiD estimator (Dube, Girardi, Jorda' and Taylor, 2023 - DGJT hereafter) in a simulated example dataset.
 	We focus here on a setting where treatment is non-absorbing and one-off.
 	Here "one-off" means that the treatment lasts only for 1 period by construction, although its effects can still be dynamic and persistent. 
 	Formally, we have D_{it}=1 if unit i experiences an event at time t, and D_{it}=0 in all other periods. 
 	Examples of this type of "one-off" settings are for example minimum wage increases or hurricanes.
+	Note that this definition of the treatment variable is unlike the one assumed in the main derivations in DGJT.
+	The specifications and clean control conditions used here are adjusted accordingly.
+	
 	Related paper: Dube, Girardi, Jorda' and Taylor "A Local Projections Approach to Difference-in-Differences" (https://www.nber.org/papers/w31184)
 	This and other example files can be downloaded at https://github.com/danielegirardi/lpdid/ 
 	Author: Daniele Girardi (King's College London), daniele.girardi@kcl.ac.uk
-	23 May 2025
+	23 May 2025 (revised 24 May 2025)
 	
 */
 
@@ -118,11 +121,6 @@ qui gen Y = y_0 + tot_effect
 // keep only relevant variables
 qui keep unit time Y effect1 effect2 effect3 treat etime1 etime2 etime3 edate1 edate2 edate3 never_treated tot_effect
 
-*save "~/Documents/GitHub/lpdid_program_building/lpdid_package/lpdidtestdata_oneoff.dta", replace
-
-local post_window 	10
-local pre_window 	5
-
 
 ************************************
 ***  2 - COMPUTE TRUE ATT        ***
@@ -145,9 +143,9 @@ forval j = 0/`post_window'{
 	}
 
 * gen indicators for clean control samples at each time horizon 
-local string "abs(L.treat)!=1"
+local string "L.treat==0"
 forv k=2/`L' {
-	local string = "`string' & abs(L`k'.treat)!=1"
+	local string = "`string' & L`k'.treat==0"
 }
 disp "`string'"
 
@@ -157,7 +155,7 @@ replace CCS_0 = 1 if `string'
 forval j = 1/`post_window' {
 	local i = `j'-1 
 	gen CCS_`j' = 0
-	replace CCS_`j' = 1 if CCS_`i'==1 & abs(F`j'.treat)!=1
+	replace CCS_`j' = 1 if CCS_`i'==1 & F`j'.treat==0
 	}	
 
 gen CCS_m1 = CCS_0
@@ -186,20 +184,20 @@ gen b_lpdid_vw=.
 forval h = 0/`post_window' {
 	qui reghdfe D`h'y 	    							 	 ///
 				treat    							  	 	 ///   /* treatment indicator */
-	if 			(treat==1 | treat==0)  & (CCS_`h'==1),	 ///    /* clean control condition */
+	if 			(treat==1 | treat==0)  & (CCS_`h'==1),	 	 ///    /* clean control condition */
 				absorb(time) vce(cluster unit)				   		/* time indicators */
 		
-		qui replace b_lpdid_vw = _b[treat] if horizon==`h'
-	}
+	qui replace b_lpdid_vw = _b[treat] if horizon==`h'
+}
 
-	forval h = 2/`pre_window' {	
-			qui reghdfe Dm`h'y  								    	///
-						treat 										///   /* treatment indicator */
-			if 			(treat==1 | treat==0)  & (CCS_m`h'==1),		///   /* clean controls condition */
-						absorb(time) vce(cluster unit)			  	  		  /* time dummies */
+forval h = 2/`pre_window' {	
+		qui reghdfe Dm`h'y  								    ///
+					treat 										///   /* treatment indicator */
+		if 			(treat==1 | treat==0)  & (CCS_m`h'==1),		///   /* clean controls condition */
+						absorb(time) vce(cluster unit)			  	  /* time dummies */
 			
-			qui replace b_lpdid_vw = _b[treat] if horizon==-`h'
-		}
+		qui replace b_lpdid_vw = _b[treat] if horizon==-`h'
+}
 	
 replace b_lpdid_vw = 0 if horizon==-1
 
