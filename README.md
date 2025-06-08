@@ -43,4 +43,4 @@ The other two examples illustrate the case of binary non-absorbing treatment, me
 ***
 
 Related paper: 
-Dube, Girardi, Jorda' and Taylor (2023) "A Local Projections Approach to Difference-in-Differences Event Studies", NBER Working Paper 31184, http://www.nber.org/papers/w31184
+Dube, Girardi, Jorda' and Taylor (2023) "A Local Projections Approach to Difference-in-Differences", NBER Working Paper 31184, http://www.nber.org/papers/w31184, forthcoming on Journal of Applied Econometrics.
