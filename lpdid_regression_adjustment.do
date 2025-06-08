@@ -128,9 +128,8 @@ forval h = 0/`post_window' {
 
 gen dtreat=d.treat
 
-/* Use the following to apply different weights (without specifying this, regression adjustment applies equal weights to all treated units, yielding an equally-weighted ATT)
-gen weight = weight_variable
-*/	
+* Change the following to apply different weights (without specifying a different weighting scheme, regression adjustment applies equal weights to all treated units, yielding an equally-weighted ATT)
+gen weight = 1
 
 	
 ******************************
