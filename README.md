@@ -24,7 +24,7 @@ to read the help file, which explains the syntax and working of the command, and
 
 While the lpdid STATA command is available, it is also easy to implement the LP-DiD estimator "manually", in the sense of writing your own STATA code for implementing LP-DiD. You might want to do this either because your application requires some bespoke adjustment, or to make sure you understand how the sausage is made. "Manually" implementing LP-DiD is easy, because the method essentially consists in estimating a simple regression (or a regression-adjustment specification) in an estimation sample defined by a 'clean control' condition.
 
-This repository contains four STATA do files that implement the LP-DiD estimator in simulated datasets. 
+This repository contains five STATA do files that implement the LP-DiD estimator in simulated datasets. 
 
 Two examples illustrate the case of binary, staggered and absorbing treatment, when only not yet treated units are used as controls:
 
@@ -38,6 +38,9 @@ The other two examples illustrate the case of binary non-absorbing treatment, me
 
 - "lpdid_oneoff_nonabs_example.do" deals with binary, non-absorbing and "one-off" treatments. Here "one-off" means that the treatment lasts only for 1 period by construction, although its effects can still be dynamic and persistent. Formally, we have D_{it}=1 if unit i experiences an event at time t, and D_{it}=0 in all other periods. Examples of this type of "one-off" settings are for example minimum wage increases or hurricanes.
 
+A fifth example file illustrates the Regression Adjustment LP-DiD estimator with covariates (Dube, Girardi, Jorda' and Taylor 2023, Sec 4.1.1)
+
+- "lpdid_oneoff_nonabs_example.do" illustrates three alternative ways to implement the Regression Adjustment LP-DiD estimator with covariates in STATA, using the STATA official command 'teffects ra' and two user-written alternatives which improve computation times. 
 
 ***
 
