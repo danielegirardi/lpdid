@@ -111,7 +111,6 @@ For simplicity & speed:
 	lagged outcome as control
 	only estimate post-events 
 	only save point estimate and standard error 
-	just a random weight (instead of equally weighted treatment effects)
 */
 
 xtset unit time
@@ -128,8 +127,10 @@ forval h = 0/`post_window' {
 	}
 
 gen dtreat=d.treat
-gen weight = runiform()	
-	
+
+/* Use the following to apply different weights (without specifying this, regression adjustment applies equal weights to all treated units, yielding an equally-weighted ATT)
+gen weight = weight_variable
+*/	
 
 	
 ******************************
