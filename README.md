@@ -20,7 +20,7 @@ restricting the estimation sample to observations that are either
 \end{cases}
 ```
 
-This 'clean control condition' ensures that estimates are obtained from a set of clean comparisons between newly treated units and not-yet treated ones, thus avoiding the unclean (or 'forbidden') comparisons that can introduce negative weighting bias in conventional TWFE specifications.
+This 'clean control condition' ensures that estimates are obtained from a set of clean DiD comparisons between newly treated units and not-yet treated ones, thus avoiding the unclean (or 'forbidden') comparisons that can introduce negative weighting bias in conventional TWFE specifications.
 
 Under the usual DiD assumptions, OLS estimation of this baseline LP-DiD specification yields a variance-weighted average treatment effect on the treated (VWATT), giving more weight to more precisely estimated cohort-specific effects. A reweighed version of the LP-DiD specification, easily implemented through a weighted regression or regression adjustment, estimates an equally-weighted ATT, giving equal weight to all treated observations.  
 
