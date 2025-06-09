@@ -4,9 +4,7 @@ LP-DiD is a convenient and flexible regression-based framework for implementing 
 
 LP-DiD uses local projections to estimate dynamic effects, while restricting the estimation sample to units entering treatment and 'clean' controls, thus avoiding the 'negative-weighting' bias of TWFE estimators. 
 
-Let $$y$$ denote the outcome variable of interest, while $D$ is a binary treatment indicator, $\delta$ are time-specific intercepts, and $e$ is an error term.
-Let $H$ denote the lenght of the post-treatment window for estimating effects, and $Q$ a possible number of pre-treatment periods for assessing pre-treatment trends.
-A baseline LP-DiD specification for staggered and absorbing treatment settings (where 'absorbing' means that once a unit gets treated, it stays treated) is as follows:
+A baseline LP-DiD specification for staggered and absorbing treatment settings can be written as follows.[^1] Let $$y$$ denote the outcome variable of interest, while $D$ is a binary treatment indicator, $\delta$ are time-specific intercepts, and $e$ is an error term. Let $H$ denote the lenght of the post-treatment window for estimating effects, and $Q$ a possible number of pre-treatment periods for assessing pre-treatment trends. Then, the baseline LP-DiD specification is
 
 ```math
 y_{i,t+h} - y_{i,t-1} 
@@ -33,6 +31,8 @@ The LP-DiD approach allows for inclusion of covariates. Under conditional parall
 LP-DiD can accommodate non-absorbing treatment, meaning that units can enter and exit treatment multiple times, through appropriate modification of the clean control condition. In particular, DGJT derive (i) a LP-DiD estimator for the effect of first-time treatment entry, and (ii) a LP-DiD estimator for the average effect of a treatment event under an additional effect stabilization assumption.
 
 See <a href="https://www.nber.org/papers/w31184" target="_blank" rel="noopener noreferrer">DJGT</a> for a detailed exposition of the LP-DiD method.
+
+[^1]: Here 'staggered' means that different units can enter treatment at different time periods, and 'absorbing' means that treatment is permanent (once a unit gets treated, it stays treated forever).
 
 ***
 
