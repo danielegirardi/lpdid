@@ -3,7 +3,7 @@
 LP-DiD is a convenient and flexible regression-based framework for implementing Difference-in-Differences, introduced in Dube, Girardi, Jorda' and Taylor (2023) - DJGT hereafter (available at https://www.nber.org/papers/w31184 and forthcoming on the Journal of Applied Econometrics).
 
 LP-DiD uses local projections to estimate dynamic effects, while restricting the estimation sample to units entering treatment and 'clean' controls, thus avoiding the 'negative-weighting' bias of TWFE estimators. 
-Let $$y$$ denote the outcome variable of interest while $D$ is a binary treatment indicator, $\delta$ are time-specific intercepts, and $e$ is an error term.
+Let $$y$$ denote the outcome variable of interest, while $D$ is a binary treatment indicator, $\delta$ are time-specific intercepts, and $e$ is an error term.
 A baseline LP-DiD specification for staggered and absorbing treatment settings (where 'absorbing' means that once a unit gets treated, it stays treated) is as follows:
 
 ```math
