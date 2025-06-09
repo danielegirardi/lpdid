@@ -1,9 +1,11 @@
-# LP-DiD
+# Local Projections Difference-in-Differences (LP-DiD)
 
-LP-DiD is a convenient and flexible regression-based framework for implementing Difference-in-Differences, introduced in Dube, Girardi, Jorda' and Taylor (2023) - DJGT hereafter (available at https://www.nber.org/papers/w31184 and forthcoming on the Journal of Applied Econometrics).
+LP-DiD is a convenient and flexible regression-based framework for implementing Difference-in-Differences, introduced in <a href="https://www.nber.org/papers/w31184" target="_blank" rel="noopener noreferrer">Dube, Girardi, Jorda' and Taylor</a> (forthcoming on the Journal of Applied Econometrics) - DJGT hereafter.
 
 LP-DiD uses local projections to estimate dynamic effects, while restricting the estimation sample to units entering treatment and 'clean' controls, thus avoiding the 'negative-weighting' bias of TWFE estimators. 
+
 Let $$y$$ denote the outcome variable of interest, while $D$ is a binary treatment indicator, $\delta$ are time-specific intercepts, and $e$ is an error term.
+Let $H$ denote the lenght of the post-treatment window for estimating effects, and $Q$ a possible number of pre-treatment periods for assessing pre-treatment trends.
 A baseline LP-DiD specification for staggered and absorbing treatment settings (where 'absorbing' means that once a unit gets treated, it stays treated) is as follows:
 
 ```math
@@ -20,6 +22,8 @@ restricting the estimation sample to observations that are either
 \end{cases}
 ```
 
+This 'clean control condition' ensures that estimates are obtained from a set of clean comparisons between newly treated units and not-yet treated ones, thus avoiding the unclean (or 'forbidden') comparisons that can introduce negative weighting bias in conventional TWFE specifications.
+
 OLS estimation of this baseline LP-DiD specification yields a variance-weighted average treatment effect on the treated (VWATT), giving more weight to more precisely estimated cohort-specific effects. A reweighed version of the LP-DiD specification, easily implemented through a weighted regression or regression adjustment, estimates an equally-weighted ATT, giving equal weight to all treated observations.  
 
 By appropriately modifying the outcome variable, one can obtain a 'pooled' estimate giving an overall average effect over the post-treatment window instead of (or in addition to) dynamic event study estimates. Moreover, one can choose whether to compare post-treatment outcomes to the last pre-treatment period (as in the baseline LP-DiD specification above) or to an average of several pre-treatment periods (as in the 'pre-mean differenced' (PMD) LP-DiD specification).
@@ -28,6 +32,7 @@ The LP-DiD approach allows for inclusion of covariates. Under conditional parall
 
 LP-DiD can accommodate non-absorbing treatment, meaning that units can enter and exit treatment multiple times, through appropriate modification of the clean control condition. In particular, DGJT derive (i) a LP-DiD estimator for the effect of first-time treatment entry, and (ii) a LP-DiD estimator for the average effect of a treatment event under an additional effect stabilization assumption.
 
+See <a href="https://www.nber.org/papers/w31184" target="_blank" rel="noopener noreferrer">DJGT</a> for a detailed exposition of the LP-DiD method.
 
 ***
 
