@@ -4,7 +4,7 @@ LP-DiD is a convenient and flexible regression-based framework for implementing 
 
 LP-DiD uses local projections to estimate dynamic effects, while restricting the estimation sample to units entering treatment and 'clean' controls, thus avoiding the 'negative-weighting' bias of TWFE estimators. 
 
-A baseline LP-DiD specification for staggered and absorbing treatment settings can be written as follows.[^1] Assume panel data for $$i=1, ..., N$$ units over $$t=1,...,T$$ periods. Let $$y$$ denote the outcome variable of interest, while $D$ is a binary treatment indicator, $\delta$ are time-specific intercepts, and $e$ is an error term. Let $H$ denote the lenght of the post-treatment window for estimating effects, and $Q$ a possible number of pre-treatment periods for assessing pre-treatment trends. Then, the baseline LP-DiD specification is
+A baseline LP-DiD specification for staggered and absorbing treatment settings can be written as follows.[^1] Assume panel data for $N$ units (indexed by $i$) and $T$ periods (indexed by $t$). Let $$y$$ denote the outcome variable of interest, while $D$ is a binary treatment indicator, $\delta$ are time-specific intercepts, and $e$ is an error term. Let $H$ denote the lenght of the post-treatment window for estimating effects, and $Q$ a possible number of pre-treatment periods for assessing pre-treatment trends. Then, the baseline LP-DiD specification is
 
 ```math
 y_{i,t+h} - y_{i,t-1} 
