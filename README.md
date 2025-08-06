@@ -62,7 +62,7 @@ Three examples illustrate the case of binary, staggered and absorbing treatment,
 
 - **lpdid_test.do** applies LP-DiD in a simulated dataset from Borusyak (2021).
 
-- **lpdid_regression_adjustment.do** focuses on the Regression Adjustment LP-DiD estimator with covariates (Dube, Girardi, Jorda' and Taylor 2023, Sec 4.1.1) and illustrates three alternative ways to implement it, using the STATA official commands 'teffects ra' or 'margins' or the user-written alternative 'kmatch ra'. They produce identical results but 'margins' and 'kmatch ra' are faster. This can be useful in settings in which 'teffects ra' is slow.
+- **lpdid_regression_adjustment.do** focuses on the Regression Adjustment LP-DiD estimator with covariates (Dube, Girardi, Jorda' and Taylor 2023, Sec 4.1.1) and illustrates four alternative ways to implement it, using the STATA official commands 'teffects ra' or 'margins' or the user-written alternatives 'kmatch ra' or 'listreg'. They produce identical results but 'margins' and 'kmatch ra' are faster. This can be especially useful in settings where 'teffects ra' is slow.
 
 The other two examples illustrate the case of binary non-absorbing treatment, meaning that units can enter and exit treatment multiple times:
 
