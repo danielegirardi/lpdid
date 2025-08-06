@@ -5,13 +5,15 @@
 	We use the lag of the differenced outcome as the covariate of interest in this example, but the same could be done with other covariates of interest, including additional fixed effects.
 	We consider a setting with absorbing treatment, using all not yet treated units as controls. 
 	
-	Three implementation strategies are compared which result in identical estimates, but with varying computational efficiency
+	Four implementation strategies are compared which result in identical estimates, but with varying computational efficiency. 
+	Two strategies require installing community-provided packages (kmatch, listreg) which are available on the SSC. 	
 	
     Authors: 
 		Daniele Girardi (King's College London), daniele.girardi@kcl.ac.uk
 		Alexander Busch (Massachusetts Institute of Technology), abusch@mit.edu
 		
-		6/7/2025
+		Created: 6/7/2025
+		Updated (adding the 'listreg' implementation): 3/8/2025
 	
 */
 
@@ -170,8 +172,6 @@ forval h = 0/`post_window' {
 timer off 1
 timer list // display run-time 
 
-
-
 *** Estimating regression adjustment with kmatch 
 gen b_kmatch = . 
 gen se_kmatch = . 
@@ -184,6 +184,23 @@ forval h = 0/`post_window' {
 		if D.treat==1 | F`h'.treat==0 [pweight=weight], att vce(cluster unit)
 	qui replace b_kmatch = _b[ATT] if t==`h'
 	qui replace se_kmatch = _se[ATT] * sqrt((e(N_clust)-1) / e(N_clust)) if t==`h' // standard error requires a degrees of freedom adjustment to be equivalent to teffects 
+	}
+	
+timer off 1
+timer list // display run-time 
+
+*** Estimating regression adjustment with listreg  
+gen b_listreg = . 
+gen se_listreg = . 
+
+timer clear 
+timer on 1
+
+forval h = 0/`post_window' {
+	qui listreg D`h'y = dtreat if (D.treat==1) | (F`h'.treat==0) [pweight=weight], controls(i.time c.ld1) normal vce(cluster unit)
+	
+	qui replace b_listreg = r(table)[1,1] if t==`h'
+	qui replace se_listreg = r(table)[2,1] if t==`h' 
 	}
 	
 timer off 1
