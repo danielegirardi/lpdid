@@ -40,7 +40,7 @@ See <a href="https://www.nber.org/papers/w31184" target="_blank" rel="noopener n
 
 A STATA command implementing LP-DiD (lpdid, by Daniele Girardi and Alexander Busch) is available and can be installed from within Stata by typing 
 ```
-ssc install lpdid 
+ssc install lpdid, replace
 ```
 You can then type 
 ```
