@@ -54,11 +54,13 @@ to read the help file, which explains the syntax and working of the command, and
 
 While the lpdid STATA command is available, it is also easy to implement the LP-DiD estimator "manually", in the sense of writing your own STATA code for implementing LP-DiD. You might want to do this either because your application requires some bespoke adjustment, or to make sure you understand how the sausage is made. "Manually" implementing LP-DiD is easy, because the method essentially consists in estimating a simple regression (or a regression-adjustment specification) in an estimation sample defined by a 'clean control' condition.
 
-This repository contains five STATA do files that implement the LP-DiD estimator in simulated datasets. 
+This repository contains six STATA do files that implement the LP-DiD estimator in simulated datasets. 
 
-Three examples illustrate the case of binary, staggered and absorbing treatment, when only not yet treated units are used as controls:
+Four examples illustrate the case of binary, staggered and absorbing treatment (where "absorbing" means that once a unit gets treated, it stays treated forever):
 
-- **LP_DiD_examplefile.do** uses a simulated dataset somewhat similar to the Montecarlo simulations presented in Dube, Girardi, Jorda' and Taylor (2023). 
+- **LP_DiD_STATA_example.do** uses a simulated dataset somewhat similar to the Montecarlo simulations presented in DGJT, and shows how to implement the baseline variance-weighted version and the reweighted version to obtain event-study estimates or pooled estimates. 
+
+- **LP_DiD_examplefile.do** is similar, but builds the simulated dataset from scratch, and includes the pre mean differenced version. 
 
 - **lpdid_test.do** applies LP-DiD in a simulated dataset from Borusyak (2021).
 
@@ -69,6 +71,11 @@ The other two examples illustrate the case of binary non-absorbing treatment, me
 - **LPDiD_nonabsorbing_example.do** illustrates the 'persistent treatment' setting:  after a unit enters treatment, its treatment status persists (ie, the treatment variable remains equal to 1) until a possible exit or reversal. This is the case assumed in Dube, Girardi, Jorda' and Taylor (2023).  An example of this type of 'persistent' treatment is democracy:  after democratization, a polity remains a democracy until a possible reversal. 
 
 - **lpdid_oneoff_nonabs_example.do** deals with binary, non-absorbing and 'one-off' (or 'shock') treatments. Here "one-off" means that the treatment lasts only for 1 period by construction (although its effects can still be dynamic and persistent, and a unit can still receive treatment multiple times). Formally, we have $D_{it}=1$ if unit i experiences an event at time t, and $D_{it}=0$ in all other periods. An example of this type of "one-off" treatment is hurricanes: the treatment indicator equals 1 if the unit is hit by a hurricane at time t, and 0 in all other periods.
+***
+
+# EXAMPLE CODES FOR IMPLEMENTATION OF LP-DiD IN R
+
+Coming soon!
 
 ***
 
