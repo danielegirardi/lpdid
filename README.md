@@ -60,7 +60,7 @@ Four examples illustrate the case of binary, staggered and absorbing treatment (
 
 - **LP_DiD_STATA_example.do** uses a simulated dataset somewhat similar to the Montecarlo simulations presented in DGJT, and shows how to implement the baseline variance-weighted version and the reweighted version to obtain event-study estimates or pooled estimates. 
 
-- **LP_DiD_examplefile.do** is similar, but builds the simulated dataset from scratch, and includes the pre mean differenced version. 
+- **LP_DiD_examplefile.do** is similar, but builds the simulated dataset from scratch instead of uploading it (allowing the user to adjust some features of the dataset if they wish so), and includes the pre-mean differenced (PMD) version of LP-DiD. 
 
 - **lpdid_test.do** applies LP-DiD in a simulated dataset from Borusyak (2021).
 
