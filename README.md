@@ -79,7 +79,9 @@ This repository contains scripts demonstrating how to implement the LP-DiD estim
 
 - [**LP_DiD_R_example_VW.R**](LP_DiD_R_example_VW.R) illustrates the baseline variance-weighted version of LP-DiD in R, for both event-study estimates and pooled estimates. 
 
-*(Additional R scripts covering the reweighted LP-DiD and non-absorbing treatments are coming soon.)*
+- [**LP_DiD_R_example_EW.R**](LP_DiD_R_example_EW.R) shows how to implement the reweighted version LP-DiD in R, for both event-study estimates and pooled estimates. Two numerically equivalent ways to implement reweighted LP-DiD are illustrated: using a weighted regression or using Regression Adjustment.
+
+*(Additional R scripts covering non-absorbing treatments, and the LP-DiD RA specification with covariates, are coming soon.)*
 
 ***
 
