@@ -50,7 +50,7 @@ to read the help file, which explains the syntax and working of the command, and
 
 ***
 
-# Example Codes For "Manual" Implementation of LP-DiD in Stata
+# Example Codes for "Manual" Implementation of LP-DiD in Stata
 
 While the lpdid STATA command is available, it is also easy to implement the LP-DiD estimator "manually", in the sense of writing your own STATA code for implementing LP-DiD. You might want to do this either because your application requires some bespoke adjustment, or to make sure you understand how the sausage is made. "Manually" implementing LP-DiD is easy, because the method essentially consists in estimating a simple regression (or a regression-adjustment specification) in an estimation sample defined by a 'clean control' condition.
 
