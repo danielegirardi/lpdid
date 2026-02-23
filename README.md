@@ -36,7 +36,7 @@ See <a href="https://www.nber.org/papers/w31184" target="_blank" rel="noopener n
 
 ***
 
-# LP-DiD Stata Command
+# LP-DiD Stata command
 
 A STATA command implementing LP-DiD (lpdid, by Daniele Girardi and Alexander Busch) is available and can be installed from within Stata by typing 
 ```stata
@@ -50,7 +50,7 @@ to read the help file, which explains the syntax and working of the command, and
 
 ***
 
-# Example Codes for "Manual" Implementation of LP-DiD in Stata
+# Example codes for "manual" implementation of LP-DiD in Stata
 
 While the lpdid STATA command is available, it is also easy to implement the LP-DiD estimator "manually", in the sense of writing your own STATA code for implementing LP-DiD. You might want to do this either because your application requires some bespoke adjustment, or to make sure you understand how the sausage is made. "Manually" implementing LP-DiD is easy, because the method essentially consists in estimating a simple regression (or a regression-adjustment specification) in an estimation sample defined by a 'clean control' condition.
 
@@ -64,7 +64,7 @@ Four examples illustrate the case of binary, staggered and absorbing treatment (
 
 - [**lpdid_test.do**](lpdid_test.do) applies LP-DiD in a simulated dataset from Borusyak (2021).
 
-- [**lpdid_regression_adjustment.do**](lpdid_regression_adjustment.do) focuses on the Regression Adjustment LP-DiD estimator with covariates (Dube, Girardi, Jorda' and Taylor 2023, Sec 4.1.1) and illustrates four alternative ways to implement it, using the STATA official commands 'teffects ra' or 'margins' or the user-written alternatives 'kmatch ra' or 'listreg'. They produce identical results but 'margins', 'kmatch ra' and 'listreg' are faster than 'teffects ra'. This can be especially useful in settings where 'teffects ra' is slow.
+- [**lpdid_regression_adjustment.do**](lpdid_regression_adjustment.do) focuses on the Regression Adjustment LP-DiD estimator with covariates (<a href="https://doi.org/10.1002/jae.70000" target="_blank" rel="noopener noreferrer">Dube, Girardi, Jorda' and Taylor 2025</a>, Sec 4.1.1) and illustrates four alternative ways to implement it, using the STATA official commands 'teffects ra' or 'margins' or the user-written alternatives 'kmatch ra' or 'listreg'. They produce identical results but 'margins', 'kmatch ra' and 'listreg' are faster than 'teffects ra'. This can be especially useful in settings where 'teffects ra' is slow.
 
 The other two examples illustrate the case of binary non-absorbing treatment, meaning that units can enter and exit treatment multiple times:
 
@@ -73,7 +73,7 @@ The other two examples illustrate the case of binary non-absorbing treatment, me
 - [**lpdid_oneoff_nonabs_example.do**](lpdid_oneoff_nonabs_example.do) deals with binary, non-absorbing and 'one-off' (or 'shock') treatments. Here "one-off" means that the treatment lasts only for 1 period by construction (although its effects can still be dynamic and persistent, and a unit can still receive treatment multiple times). Formally, we have $D_{it}=1$ if unit i experiences an event at time t, and $D_{it}=0$ in all other periods. An example of this type of "one-off" treatment is hurricanes: the treatment indicator equals 1 if the unit is hit by a hurricane at time t, and 0 in all other periods.
 ***
 
-# LP-DiD Example Scripts for R
+# LP-DiD example scripts for R
 
 This repository contains scripts demonstrating how to implement the LP-DiD estimator in R:
 
