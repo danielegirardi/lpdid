@@ -38,7 +38,7 @@ See <a href="https://www.nber.org/papers/w31184" target="_blank" rel="noopener n
 
 # LP-DiD Stata command
 
-A STATA command implementing LP-DiD (lpdid, by Daniele Girardi and Alexander Busch) is available and can be installed from within Stata by typing 
+A Stata command implementing LP-DiD (lpdid, by Daniele Girardi and Alexander Busch) is available and can be installed from within Stata by typing 
 ```stata
 ssc install lpdid, replace
 ```
@@ -52,9 +52,9 @@ to read the help file, which explains the syntax and working of the command, and
 
 # Example codes for "manual" implementation of LP-DiD in Stata
 
-While the lpdid STATA command is available, it is also easy to implement the LP-DiD estimator "manually", in the sense of writing your own STATA code for implementing LP-DiD. You might want to do this either because your application requires some bespoke adjustment, or to make sure you understand how the sausage is made. "Manually" implementing LP-DiD is easy, because the method essentially consists in estimating a simple regression (or a regression-adjustment specification) in an estimation sample defined by a 'clean control' condition.
+While the lpdid Stata command is available, it is also easy to implement the LP-DiD estimator "manually", in the sense of writing your own Stata code for implementing LP-DiD. You might want to do this either because your application requires some bespoke adjustment, or to make sure you understand how the sausage is made. "Manually" implementing LP-DiD is easy, because the method essentially consists in estimating a simple regression (or a regression-adjustment specification) in an estimation sample defined by a 'clean control' condition.
 
-This repository contains six STATA do files that implement the LP-DiD estimator in simulated datasets. 
+This repository contains six Stata do files that implement the LP-DiD estimator in simulated datasets. 
 
 Four examples illustrate the case of binary, staggered and absorbing treatment (where "absorbing" means that once a unit gets treated, it stays treated forever):
 
@@ -64,7 +64,7 @@ Four examples illustrate the case of binary, staggered and absorbing treatment (
 
 - [**lpdid_test.do**](lpdid_test.do) applies LP-DiD in a simulated dataset from Borusyak (2021).
 
-- [**lpdid_regression_adjustment.do**](lpdid_regression_adjustment.do) focuses on the Regression Adjustment LP-DiD estimator with covariates (<a href="https://doi.org/10.1002/jae.70000" target="_blank" rel="noopener noreferrer">Dube, Girardi, Jorda' and Taylor 2025</a>, Sec 4.1.1) and illustrates four alternative ways to implement it, using the STATA official commands 'teffects ra' or 'margins' or the user-written alternatives 'kmatch ra' or 'listreg'. They produce identical results but 'margins', 'kmatch ra' and 'listreg' are faster than 'teffects ra'. This can be especially useful in settings where 'teffects ra' is slow.
+- [**lpdid_regression_adjustment.do**](lpdid_regression_adjustment.do) focuses on the Regression Adjustment LP-DiD estimator with covariates (<a href="https://doi.org/10.1002/jae.70000" target="_blank" rel="noopener noreferrer">Dube, Girardi, Jorda' and Taylor 2025</a>, Sec 4.1.1) and illustrates four alternative ways to implement it, using the Stata official commands 'teffects ra' or 'margins' or the user-written alternatives 'kmatch ra' or 'listreg'. They produce identical results but 'margins', 'kmatch ra' and 'listreg' are faster than 'teffects ra'. This can be especially useful in settings where 'teffects ra' is slow.
 
 The other two examples illustrate the case of binary non-absorbing treatment, meaning that units can enter and exit treatment multiple times:
 
