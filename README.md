@@ -1,6 +1,6 @@
 # Local Projections Difference-in-Differences (LP-DiD)
 
-LP-DiD is a convenient and flexible regression-based framework for implementing Difference-in-Differences, introduced in <a href="https://www.nber.org/papers/w31184" target="_blank" rel="noopener noreferrer">Dube, Girardi, Jorda' and Taylor</a> (forthcoming on the Journal of Applied Econometrics) - DJGT hereafter.
+LP-DiD is a convenient and flexible regression-based framework for implementing Difference-in-Differences, introduced in <a href="https://doi.org/10.1002/jae.70000" target="_blank" rel="noopener noreferrer">Dube, Girardi, Jorda' and Taylor (2025)</a> - DGJT hereafter.
 
 LP-DiD uses local projections to estimate dynamic effects, while restricting the estimation sample to units entering treatment and 'clean' controls, thus avoiding the 'negative-weighting' bias of TWFE estimators. 
 
@@ -30,7 +30,7 @@ The LP-DiD approach allows for inclusion of covariates. Under conditional parall
 
 LP-DiD can accommodate non-absorbing treatment, meaning that units can enter and exit treatment multiple times, through appropriate modification of the clean control condition. In particular, DGJT derive (i) a LP-DiD estimator for the effect of first-time treatment entry, and (ii) a LP-DiD estimator for the average effect of a treatment event under an additional effect stabilization assumption.
 
-See <a href="https://www.nber.org/papers/w31184" target="_blank" rel="noopener noreferrer">DJGT</a> for a detailed exposition of the LP-DiD method.
+See <a href="https://www.nber.org/papers/w31184" target="_blank" rel="noopener noreferrer">DGJT</a> for a detailed exposition of the LP-DiD method.
 
 [^1]: Here 'staggered' means that different units can enter treatment at different time periods, and 'absorbing' means that treatment is permanent (once a unit gets treated, it stays treated forever).
 
