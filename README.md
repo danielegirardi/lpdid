@@ -1,21 +1,25 @@
+[Local Projections Difference-in-Differences (LP-DiD)](#local-projections-difference-in-differences-lp-did) | [LP-DiD Stata command](#lp-did-stata-command) | [Example codes for "manual" implementation of LP-DiD in Stata](#example-codes-for-manual-implementation-of-lp-did-in-stata) | [LP-DiD example scripts for R](#lp-did-example-scripts-for-r)
+
+***
+
 # Local Projections Difference-in-Differences (LP-DiD)
 
 LP-DiD is a convenient and flexible regression-based framework for implementing Difference-in-Differences, introduced in <a href="https://doi.org/10.1002/jae.70000" target="_blank" rel="noopener noreferrer">Dube, Girardi, Jorda' and Taylor (2025)</a> - DGJT hereafter.
 
 LP-DiD uses local projections to estimate dynamic effects, while restricting the estimation sample to units entering treatment and 'clean' controls, thus avoiding the 'negative-weighting' bias of TWFE estimators. 
 
-A baseline LP-DiD specification for staggered and absorbing treatment settings can be written as follows.[^1] Assume panel data for $N$ units (indexed by $i$) and $T$ periods (indexed by $t$). Let $y$ denote the outcome variable of interest, while $D$ is a binary treatment indicator, $\delta$ are time-specific intercepts, and $e$ is an error term. Let $H$ denote the length of the post-treatment window for estimating effects, and $Q$ a possible number of pre-treatment periods for assessing pre-treatment trends. Then, the baseline LP-DiD specification is
+A baseline LP-DiD specification for staggered and absorbing treatment settings can be written as follows.[^1] Assume panel data for $N$ units (indexed by $i$) and $T$ periods (indexed by $t$). Let $y$ denote the outcome variable of interest, while $D$ is a binary treatment indicator, $	heta$ are time-specific intercepts, and $e$ is an error term. Let $H$ denote the length of the post-treatment window for estimating effects, and $Q$ a possible number of pre-treatment periods for assessing pre-treatment trends. Then, the baseline LP-DiD specification is
 
 ```math
 y_{i,t+h} - y_{i,t-1} 
- = \,\,\beta^{LP-DiD}_h \Delta D_{it} + \delta^h_t + e^h_{it} \quad \text{for } h = -Q, ..., 0, ..., H\,,
+ = \,\beta^{LP-DiD}_h \Delta D_{it} + \delta^h_t + e^h_{it} \quad \text{for } h = -Q, ..., 0, ..., H\,.
 ```
 
 restricting the estimation sample to observations that are either
 ```math
 \begin{cases}
-\text{newly treated:} \qquad \Delta D_{it}=1 \,, \\
-\text{or clean control:} \quad \, D_{i, t+h} = 0 \,.
+\text{newly treated:} \qquad \Delta D_{it}=1 \\ 
+\text{or clean control:} \quad \ D_{i, t+h} = 0 \,.
 
 \end{cases}
 ```
@@ -58,28 +62,28 @@ This repository contains six Stata do files that implement the LP-DiD estimator 
 
 Four examples illustrate the case of binary, staggered and absorbing treatment (where "absorbing" means that once a unit gets treated, it stays treated forever):
 
-- [**LP_DiD_STATA_example.do**](LP_DiD_STATA_example.do) uses a simulated dataset somewhat similar to the Montecarlo simulations presented in DGJT, and shows how to implement the baseline variance-weighted version and the reweighted version to obtain event-study estimates or pooled estimates. 
+- [**LP_DiD_STATA_example.do**](STATA%20example%20files/LP_DiD_STATA_example.do) uses a simulated dataset somewhat similar to the Montecarlo simulations presented in DGJT, and shows how to implement the baseline variance-weighted version and the reweighted version to obtain event-study estimates or pooled estimates. 
 
-- [**LP_DiD_examplefile.do**](LP_DiD_examplefile.do) is similar, but builds the simulated dataset from scratch instead of uploading it (allowing the user to adjust some features of the dataset if they wish so), and includes the pre-mean differenced (PMD) version of LP-DiD. 
+- [**LP_DiD_examplefile.do**](STATA%20example%20files/LP_DiD_examplefile.do) is similar, but builds the simulated dataset from scratch instead of uploading it (allowing the user to adjust some features of the dataset if they wish so), and includes the pre-mean differenced (PMD) version of LP-DiD. 
 
-- [**lpdid_test.do**](lpdid_test.do) applies LP-DiD in a simulated dataset from Borusyak (2021).
+- [**lpdid_test.do**](STATA%20example%20files/lpdid_test.do) applies LP-DiD in a simulated dataset from Borusyak (2021).
 
-- [**lpdid_regression_adjustment.do**](lpdid_regression_adjustment.do) focuses on the Regression Adjustment LP-DiD estimator with covariates (<a href="https://doi.org/10.1002/jae.70000" target="_blank" rel="noopener noreferrer">Dube, Girardi, Jorda' and Taylor 2025</a>, Sec 4.1.1) and illustrates four alternative ways to implement it, using the Stata official commands 'teffects ra' or 'margins' or the user-written alternatives 'kmatch ra' or 'listreg'. They produce identical results but 'margins', 'kmatch ra' and 'listreg' are faster than 'teffects ra'. This can be especially useful in settings where 'teffects ra' is slow.
+- [**lpdid_regression_adjustment.do**](STATA%20example%20files/lpdid_regression_adjustment.do) focuses on the Regression Adjustment LP-DiD estimator with covariates (<a href="https://doi.org/10.1002/jae.70000" target="_blank" rel="noopener noreferrer">Dube, Girardi, Jorda' and Taylor 2025</a>, Sec 4.1.1) and illustrates four alternative ways to implement it, using the Stata official commands 'teffects ra' or 'margins' or the user-written alternatives 'kmatch ra' or 'listreg'. They produce identical results but 'margins', 'kmatch ra' and 'listreg' are faster than 'teffects ra'. This can be especially useful in settings where 'teffects ra' is slow.
 
 The other two examples illustrate the case of binary non-absorbing treatment, meaning that units can enter and exit treatment multiple times:
 
-- [**LPDiD_nonabsorbing_example.do**](LPDiD_nonabsorbing_example.do) illustrates the 'persistent treatment' setting:  after a unit enters treatment, its treatment status persists (ie, the treatment variable remains equal to 1) until a possible exit or reversal. This is the case assumed in Dube, Girardi, Jorda' and Taylor (2023).  An example of this type of 'persistent' treatment is democracy:  after democratization, a polity remains a democracy until a possible reversal. 
+- [**LPDiD_nonabsorbing_example.do**](STATA%20example%20files/LPDiD_nonabsorbing_example.do) illustrates the 'persistent treatment' setting:  after a unit enters treatment, its treatment status persists (ie, the treatment variable remains equal to 1) until a possible exit or reversal. This is the case assumed in Dube, Girardi, Jorda' and Taylor (2023).  An example of this type of 'persistent' treatment is democracy:  after democratization, a polity remains a democracy until a possible reversal. 
 
-- [**lpdid_oneoff_nonabs_example.do**](lpdid_oneoff_nonabs_example.do) deals with binary, non-absorbing and 'one-off' (or 'shock') treatments. Here "one-off" means that the treatment lasts only for 1 period by construction (although its effects can still be dynamic and persistent, and a unit can still receive treatment multiple times). Formally, we have $D_{it}=1$ if unit i experiences an event at time t, and $D_{it}=0$ in all other periods. An example of this type of "one-off" treatment is hurricanes: the treatment indicator equals 1 if the unit is hit by a hurricane at time t, and 0 in all other periods.
+- [**lpdid_oneoff_nonabs_example.do**](STATA%20example%20files/lpdid_oneoff_nonabs_example.do) deals with binary, non-absorbing and 'one-off' (or 'shock') treatments. Here "one-off" means that the treatment lasts only for 1 period by construction (although its effects can still be dynamic and persistent, and a unit can still receive treatment multiple times). Formally, we have $D_{it}=1$ if unit i experiences an event at time t, and $D_{it}=0$ in all other periods.
 ***
 
 # LP-DiD example scripts for R
 
 This repository contains scripts demonstrating how to implement the LP-DiD estimator in R:
 
-- [**LP_DiD_R_example_VW.R**](LP_DiD_R_example_VW.R) illustrates the baseline variance-weighted version of LP-DiD in R, for both event-study estimates and pooled estimates. 
+- [**LP_DiD_R_example_VW.R**](R%20example%20files/LP_DiD_R_example_VW.R) illustrates the baseline variance-weighted version of LP-DiD in R, for both event-study estimates and pooled estimates. 
 
-- [**LP_DiD_R_example_EW.R**](LP_DiD_R_example_EW.R) shows how to implement the reweighted version of LP-DiD in R, for both event-study estimates and pooled estimates. Two numerically equivalent ways to implement reweighted LP-DiD are illustrated: using a weighted regression or using Regression Adjustment.
+- [**LP_DiD_R_example_EW.R**](R%20example%20files/LP_DiD_R_example_EW.R) shows how to implement the reweighted version of LP-DiD in R, for both event-study estimates and pooled estimates. Two numerically equivalent ways to implement reweighted LP-DiD are illustrated: using a weighted regression or using Regression Adjustment.
 
 *(Additional R scripts covering non-absorbing treatments, and the LP-DiD RA specification with covariates, are coming soon.)*
 
