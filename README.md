@@ -59,6 +59,7 @@ help lpdid
 ```
 to read the help file, which explains the syntax and working of the command, and provides examples using simulated datasets. More details can be found on <a href="https://econpapers.repec.org/software/bocbocode/S459273.htm" target="_blank" rel="noopener noreferrer">the package listing</a>, and you can ask questions (or signal possible problems/bugs) by sending us an email or by replying to the corresponding <a href="https://www.statalist.org/forums/forum/general-stata-discussion/general/1736005-lpdid-new-module-implementing-local-projections-difference-in-differences" target="_blank" rel="noopener noreferrer">Statalist discussion</a>.
 
+The [changelog](LPDID_CHANGELOG.md) records what changed in each release, including version 1.1.0 (September 2026), which added new options and changed some existing behaviour.
 ***
 
 # Example codes for "manual" implementation of LP-DiD in Stata
