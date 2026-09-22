@@ -1,6 +1,6 @@
 # Changelog for -lpdid- Stata command
 
-All significant changes to `lpdid`, the Stata command implementing the Local Projections
+This document lists all significant changes to `lpdid`, the Stata command implementing the Local Projections
 Difference-in-Differences (LP-DiD) estimator of Dube, Girardi, Jordà and Taylor (*Journal of Applied
 Econometrics*, 2025).
 
@@ -29,8 +29,9 @@ of those corrections can change results relative to previous versions.
 ### Main changes to existing behaviour
 
 - **The pooled estimates are no longer reported by default.** They now require the new
-  `pooled` option. By default, `lpdid` now prints only the event study. It no longer produces
-  `e(pooled_results)`, unless the `pooled` option is specified.
+  `pooled` option. By default, `lpdid` now prints only the event study. As a result,
+  `e(pooled_results)` is no longer produced by default, 
+  but only if the `pooled` option is specified.
 
   To restore the previous output (event study + pooled estimates), add `pooled`:
 
@@ -47,11 +48,13 @@ of those corrections can change results relative to previous versions.
   The `nocomp` option rules out composition effects across the event window, ensuring that the set of contributing 
   observations is the same across every post- and pre-treatment horizon in the window. In previous
   releases, it ruled out composition changes caused by a control entering treatment, but let the sample vary
-  whenever the outcome at a given horizon was unavailable — from a missing value, or simply
+  whenever the outcome at a given horizon was unavailable — from a missing value, or
   from the window running off the end of the panel. It now additionally requires the outcome to
   be observed at every horizon, so a row enters every horizon or none.
 
-  This makes the sample genuinely fixed across horizons. It comes with a cost in terms of sample size.
+  This makes the sample fully fixed across horizons also 
+  in settings with missing values or truncated windows. 
+  It comes with a cost in terms of sample size.
   
 - **The clean-control sample is now stricter at the panel edge, under `nonabsorbing()`.** 
   To count as a clean control at horizon *h*, a row must have had no treatment switch in the preceding
@@ -64,10 +67,7 @@ of those corrections can change results relative to previous versions.
   
 - **The clean-control condition is now stricter in presence of missing values, under `nonabsorbing()`.** 
   Under persistent non-absorbing treatment, a unit whose treatment status was *missing* at some
-  future period inside the window was admitted as a clean control, even though it may have
-  switched. It is now excluded. On a placebo design with sticky treatment and units going dark,
-  this removes a spurious effect significant at *t* = 5.25. There is no option to restore the
-  old behaviour: no assumption about the future can make an unobserved switch observable.
+  future period inside the window was admitted as a clean control. It is now excluded. 
 
 - **An inverted pooled window is now refused.** A two-number argument given the wrong way round
   — `post_pooled(4 2)`, or `pre_pooled(5 2)` — previously ran and returned a (probably) incorrect
@@ -103,7 +103,8 @@ of those corrections can change results relative to previous versions.
 
 ### Other changes that could change results
 
-- **Horizons the estimator could not fit are now reported as missing.** Where a horizon has no
+- **Horizons the estimator could not fit are now reported as missing.** 
+  Where a horizon has no
   clean control observation, so that the treatment indicator is collinear with the time
   effects, 1.0.3 reported a coefficient of 0 with a standard error of 0. Those cells now come back missing and
   are named in a note, in the event-study and pooled tables alike. An aggregate average whose
@@ -120,18 +121,11 @@ of those corrections can change results relative to previous versions.
   to catch cases that previous versions might have missed. In the vast majority of cases, this
   will produce no change at all.
 
-- **Numerical precision.** The LP-DiD outcome variable and, where `rw` is not used, the weight
-  variables, were stored as `float`. They are now `double` throughout. Every coefficient moves
-  in roughly the ninth significant digit. On the `rw` route the change is somewhat larger 
-  (in roughly the sixth significant digit) because the re-weighting factor is now computed in 
-  closed form rather than from an auxiliary regression with rounding, so is now more precise. 
+- **Numerical precision.** 
+  The LP-DiD outcome variable and, where `rw` is not used, the weight
+  variables, were stored as `float`. They are now `double` throughout. 
+  This can cause very small changes in point estimates.
   Nothing about inference changes.
-
-- **Wild-bootstrap p-values and intervals may change slightly.** Rows that previously failed now
-  estimate, and each calls `boottest`, which consumes random numbers. Later rows in the same
-  run therefore draw a different bootstrap sample, and their p-values and interval bounds move
-  by Monte Carlo noise. Nothing the estimator computes changes: coefficients, standard errors
-  and observation counts are untouched.
   
 - **A single unfeasible regression no longer aborts the whole command.**
   Horizons that cannot be estimated are now reported as missing, but the rest of the run completes
@@ -140,10 +134,11 @@ of those corrections can change results relative to previous versions.
 ### Bug fixes
 
 - When `nonabsorbing` was selected with both `oneoff` and `firsttreat`, and neither `notyet` nor `nevertreated`, 
-  treatment episodes were miscounted, resulting in usable observations being discarded.
+  treatment episodes were miscounted, resulting in usable observations being discarded. 
+  Fixed in version 1.1.0
 - Under the `bootstrap()` option, controls written in factor notation other than the plainest 
   (eg, `ib2.cat`, `ibn.cat`, `io3.cat`, `i(2/5).cat`, `2.cat`) returned an empty table.
-  They now estimate. Controls in the format `i.cat` were never affected.
+  They now estimate. Controls in simpler factor notation (eg, `i.cat`) were never affected.
 - `rw` with `bootstrap()` and an `i.`-prefixed control entered through the `controls()` option 
   returned an empty table; it now returns estimates.
 - `rw` with `bootstrap()` on a deterministic panel with no stochastic variation aborted the command with r(303); 
@@ -151,8 +146,6 @@ of those corrections can change results relative to previous versions.
   real-world application. It can be relevant for deterministic simulated test datasets without random variation.
 - With `bootstrap()` option, a failure inside `boottest` aborted the entire run, discarding every other estimate.
   `boottest` can now decline to compute while still returning the other estimates.
-- The pre-treatment aggregate on the `rw` analytic route was suppressed entirely when a
-  control, weight or cluster variable had any missing value on a qualifying row.
 - `pmd()` and pre-treatment pooled estimates could discard usable rows in presence of missing values. 
   In previous releases, the moving average was built with `egen … , filter()`, which drops a row whenever the outcome is missing
   at the *current* period — even when the current period is not in the window being averaged.
@@ -162,10 +155,9 @@ of those corrections can change results relative to previous versions.
 - The `e(dylags)` scalar, containing the number of first-differenced lags of the outcome used as covariates,
   mirroring `e(ylags)`, was promised by earlier versions but not actually produced. This was fixed in version 1.1.0.
 - When `rw` uses a weighted regression (ie, when no covariates or additional fixed effects are added), 
-  it had some imperfection in presence of missing values. The weights were computed in a sample that might not 
-  be identical to the estimation sample in presence of missing values. Moreover, under absorbing treatment, 
-  every pre-treatment horizon used the factor computed at horizon 0, so where the pre-treatment horizons rested on 
-  different samples because of missing values, the weights were wrong and rows outside the horizon-0 sample were dropped. 
+  it could have some imperfection in presence of missing values. 
+  The weights were computed in a sample that might not 
+  be fully identical to the estimation sample in presence of missing values. 
   All this is now fixed, so the weights are always computed on the correct estimation sample also in presence of missing values.
 - When `rw` uses a weighted regression (ie, when no covariates or additional fixed effects are added) and the user supplies their own weights, 
   the user-supplied weights were not incorporated into the re-weighting factor. Now they are (as they should).
@@ -187,9 +179,9 @@ of those corrections can change results relative to previous versions.
 
 - **Regression adjustment now exits when it can estimate nothing.** With `rw` and covariates
   and without `bootstrap()`, a run in which no horizon could be fitted previously returned
-  r(0) together with an all-missing `e(results)`, which is indistinguishable from a successful
-  run on unusable data. It now exits with r(2001) and a message. The default routes already
-  behaved this way. `rw` with `bootstrap()` is unchanged.
+  r(0) together with an all-missing `e(results)`. It now exits with r(2001) and a message. 
+  The default routes already behaved this way. 
+  `rw` with `bootstrap()` is unchanged.
 
 - **`egenmore` is no longer required.** The dependencies are `reghdfe`, `listreg` and
   `boottest`; `reghdfe` in turn needs `ftools` and `require`. If a previously working
