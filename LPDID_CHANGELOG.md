@@ -23,8 +23,9 @@ ssc install lpdid, replace
 
 The largest release since 1.0.0. It adds a new estimator of the overall average effect 
 (in addition to the pooled LP-DiD estimates),  a pre-trend test, and a number of 
-corrections to the definition of the estimation sample. Some
-of those corrections can change results relative to previous versions.
+other adjustments and bug fixes. Some
+of those changes can move results relative to previous versions
+in some specific settings (especially settings with many missing values).
 
 ### Main changes to existing behaviour
 
